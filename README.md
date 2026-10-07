@@ -11,9 +11,9 @@ The analysis counts restaurants within each budget, including cheaper menus. It 
 All paths below start from this repository folder.
 
 ```text
-blog2/
-├── index.qmd                       Article, with hidden calls to the analysis
+Blog2/
 ├── README.md                       Sources and replication instructions
+├── blog2.Rproj                     Open this project in RStudio
 ├── code/
 │   ├── analysis.R                  Rebuilds the saved-data analysis
 │   └── scrape.R                    Optional request for a new participant list
@@ -41,26 +41,29 @@ Seven linked menus were reviewed on October 7, 2026. `cuisine-notes.csv` gives e
 
 `analysis.R` cleans text, checks missing values and duplicates, joins the source notes by URL, and adds the documented options. It uses the cheapest listed menu to count a restaurant only once per meal and budget. All counts, differences, cleaned files, and plots are calculated and saved by the script; they are not copied from the Console.
 
-## Run the code
+## Replication instructions
 
-1. Download or clone this repository, then open `blog2.Rproj` in RStudio.
+These steps rerun the code to recreate the analysis results and figures from the saved inputs.
+
+1. Download or clone this repository, then open `blog2.Rproj` in RStudio. The working directory should be this repository folder.
 2. Install missing packages once:
 
    ```r
    install.packages(c("tidyverse", "rvest", "knitr", "rmarkdown"))
    ```
 
-3. Open `index.qmd` and click **Render**. This runs `code/analysis.R`. The article shows prose and figures, not code or Console output. The article is saved as `index.html` in this repository folder.
+3. Run the analysis in the R Console:
 
-After packages are installed, this workflow needs no internet. It reads only the three files in `data/source/` and recreates `data/processed/` and `results/` automatically.
+   ```r
+   source("code/analysis.R")
+   ```
 
-To run only the analysis, open `blog2.Rproj` and run this in the R Console:
+4. Check the generated files: cleaned data in `data/processed/`, six tables in `results/tables/`, and two figures in `results/figures/`. The file names and expected checks are listed below.
+The article source remains in the [website repository](https://github.com/emmazhu-collab/website/blob/main/blog/posts/post2/index.qmd). This repository contains the code, data, and outputs needed to reproduce its analysis.
 
-```r
-source("code/analysis.R")
-```
+After packages are installed, the analysis needs no internet or API key. It reads the three included files in `data/source/` and recreates the output folders automatically. Keep those source files unchanged to reproduce this version.
 
-The working directory should be this repository folder. From a terminal opened here, the equivalent command is `Rscript code/analysis.R`.
+From a terminal opened in this repository folder, the analysis command is `Rscript code/analysis.R`.
 
 ## Outputs and checks
 
